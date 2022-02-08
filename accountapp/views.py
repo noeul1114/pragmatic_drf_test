@@ -19,4 +19,3 @@ class AccountCreateAPIView(CreateAPIView):
     serializer_class = PragmaticUserSerializer
 
     permission_classes = [permissions.AllowAny]
-    authentication_classes = [TokenAuthentication]
