@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
 )
 
 
-class MyUserManager(BaseUserManager):
+class PragmaticUserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, password=None):
         """
         Creates and saves a User with the given email, date of
@@ -47,7 +47,7 @@ class PragmaticUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    objects = MyUserManager()
+    objects = PragmaticUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['date_of_birth']
