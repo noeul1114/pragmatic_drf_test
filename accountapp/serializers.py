@@ -51,4 +51,10 @@ class PragmaticUserSerializer(HyperlinkedModelSerializer):
         return instance
 
 
+class PragmaticUserSerializerWithoutEmail(HyperlinkedModelSerializer):
+    class Meta:
+        model = PragmaticUser
+        fields = ('url', 'date_of_birth')
+
+
 

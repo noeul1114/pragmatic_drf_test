@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from accountapp.models import PragmaticUser
 from accountapp.permissions import AccountPermission
-from accountapp.serializers import PragmaticUserSerializer
+from accountapp.serializers import PragmaticUserSerializer, PragmaticUserSerializerWithoutEmail
 
 
 def hello_world(request):
@@ -17,4 +17,12 @@ class PragmaticUserAPIViewSet(ModelViewSet):
     serializer_class = PragmaticUserSerializer
 
     permission_classes = [AccountPermission]
+
+    http_method_names = ['get', 'post', 'patch', 'delete', 'options', 'head']
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return PragmaticUserSerializerWithoutEmail
+        else:
+            return PragmaticUserSerializer
 
