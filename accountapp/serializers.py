@@ -15,7 +15,7 @@ class PragmaticUserSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = PragmaticUser
-        fields = ('email', 'date_of_birth', 'password')
+        fields = ('url', 'email', 'date_of_birth', 'password')
 
     def create(self, validated_data):
         return self.Meta.model.objects.create_user(**validated_data)
