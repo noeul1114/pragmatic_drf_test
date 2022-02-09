@@ -1,21 +1,11 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import permissions
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.generics import CreateAPIView
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
 from accountapp.models import PragmaticUser
 from accountapp.serializers import PragmaticUserSerializer
 
 
-def hello_world(request):
-    return HttpResponse("HELLO WORLD!")
-
-
-class AccountCreateAPIView(CreateAPIView):
-    queryset = PragmaticUser
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = PragmaticUser.objects.all()
     serializer_class = PragmaticUserSerializer
 
-    permission_classes = [permissions.AllowAny]

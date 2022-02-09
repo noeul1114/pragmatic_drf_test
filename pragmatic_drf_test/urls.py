@@ -13,29 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.shortcuts import redirect
 from django.urls import path, include
-from rest_framework import routers, serializers, viewsets, status
+from rest_framework import routers
 
-# ViewSets define the view behavior.
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
+from accountapp.views import UserViewSet
 
-from accountapp.models import PragmaticUser
-from accountapp.serializers import PragmaticUserSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = PragmaticUser.objects.all()
-    serializer_class = PragmaticUserSerializer
-
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'users', UserViewSet)
 
 # Wire up our API using automatic URL routing.
